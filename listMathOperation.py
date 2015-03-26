@@ -1,13 +1,9 @@
 '''
 Created on Feb 23, 2015
 
-@author: Jarvis
-'''
-'''
-Created on Feb 23, 2015
 
-@author: Jarvis
 '''
+
 import MySQLdb
 import re
 import math
