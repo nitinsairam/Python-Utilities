@@ -1,0 +1,108 @@
+go to bin folder of your mysql installation directory
+
+run == mysql -u root -p
+then enter password
+
+SHOW DATABASES;
+
+Creation of database
+====================
+CREATE DATABASE hospital;
+
+
+Use your created database
+=========================
+USE hospital;
+
+
+
+Create Tables
+==============
+
+CREATE TABLE doctor (doctor_id int , speciality varchar(50),PRIMARY KEY ( doctor_id ));
+
+
+CREATE TABLE patient (patient_id int ,patient_name varchar(50),doctor_id int,PRIMARY KEY ( patient_id ),FOREIGN KEY fk(doctor_id) REFERENCES doctor(doctor_id) ON DELETE SET NULL);
+
+Check Schema of your table
+==========================
+DESCRIBE doctor;
+DESCRIBE patient;
+
+
+Insertion into both tables
+==========================
+
+INSERT INTO doctor ( doctor_id,speciality) VALUES (101, "Cardiologist");
+COMMIT;
+INSERT INTO doctor ( doctor_id,speciality) VALUES (102,"Neurosurgeon");
+COMMIT;
+INSERT INTO doctor ( doctor_id,speciality) VALUES (103,"Orthopedic");
+COMMIT;
+INSERT INTO doctor ( doctor_id,speciality) VALUES (104,"Paediatrician");
+COMMIT;
+INSERT INTO doctor ( doctor_id,speciality) VALUES (105,"Dermatologist");
+COMMIT;
+
+
+
+INSERT INTO patient( patient_id,patient_name,doctor_id) VALUES (101, "john", 103);
+INSERT INTO patient( patient_id,patient_name,doctor_id) VALUES (102, "lucy", 102);
+INSERT INTO patient( patient_id,patient_name,doctor_id) VALUES (103, "ronny", 105);
+INSERT INTO patient( patient_id,patient_name,doctor_id) VALUES (104, "michael", 102);
+INSERT INTO patient( patient_id,patient_name,doctor_id) VALUES (105, "bijoy", 101);
+INSERT INTO patient( patient_id,patient_name,doctor_id) VALUES (106, "arun", 104);
+
+
+
+Look up the values
+==================
+SELECT doctor_id,speciality from doctor;
+
+SELECT * FROM doctor;
+
+SELECT * FROM patient;
+
+Add column if you missed to add any specific column
+===================================================
+ALTER TABLE doctor ADD COLUMN salary int;
+DESCRIBE doctor;
+
+ALTER TABLE patient ADD COLUMN disease varchar(255);
+DESCRIBE patient;
+
+Upadate column values
+=====================
+UPDATE doctor SET salary=250000 WHERE doctor_id=103;
+SELECT * FROM doctor;
+
+UPDATE patient SET disease="TB";
+SELECT * FROM PATIENT;
+
+To Join two tables on the basis of common attribute
+===================================================
+SELECT patient.patient_id,patient.patient_name,doctor.doctor_id,doctor.speciality FROM patient,doctor WHERE patient.doctor_id= doctor.doctor_id;
+
+
+Delete tables if you want to delete any table
+=============================================
+DELETE FROM patient WHERE patient_name='john';
+DELETE FROM doctor WHERE doctor_id=103;
+
+
+
+if error
+========
+SHOW CREATE TABLE patient;
+
+
+Droping constraints
+===================
+ALTER TABLE patient DROP FOREIGN KEY patient_ibfk_1;
+
+
+Drop the whole tables/database if you want
+==========================================
+DROP TABLE doctor;
+DROP TABLE IF EXISTS contenttype
+DROP DATABASE 
